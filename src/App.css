@@ -1,0 +1,537 @@
+/* --- Ultra-Realistic Windows 11 Fluent Tokens --- */
+:root {
+  --win-bg: #eceff1;
+  --win-taskbar: rgba(243, 243, 243, 0.85);
+  --win-surface: rgba(255, 255, 255, 0.75);
+  --win-sidebar: rgba(243, 243, 243, 0.6);
+  --win-border: rgba(0, 0, 0, 0.12);
+  --win-text: #202020;
+  --win-text-muted: #5f5f5f;
+  --win-accent: #0078d4;
+  --win-selected: rgba(0, 120, 212, 0.08);
+  --win-selected-border: rgba(0, 120, 212, 0.3);
+  --win-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+  --win-hover: rgba(0, 0, 0, 0.04);
+
+  /* GitHub Engine Tokens */
+  --gh-bg: #ffffff;
+  --gh-border: #d0d7de;
+  --gh-muted: #65717c;
+  --gh-accent: #0969da;
+  --gh-code-bg: #f6f8fa;
+}
+
+.dark {
+  --win-bg: #0a0f1d;
+  --win-taskbar: rgba(32, 32, 32, 0.85);
+  --win-surface: rgba(45, 45, 45, 0.75);
+  --win-sidebar: rgba(32, 32, 32, 0.6);
+  --win-border: rgba(255, 255, 255, 0.08);
+  --win-text: #ffffff;
+  --win-text-muted: #b0b0b0;
+  --win-accent: #60cdff;
+  --win-selected: rgba(96, 205, 255, 0.15);
+  --win-selected-border: rgba(96, 205, 255, 0.4);
+  --win-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+  --win-hover: rgba(255, 255, 255, 0.05);
+
+  /* GitHub Dark Tokens */
+  --gh-bg: #0d1117;
+  --gh-border: #30363d;
+  --gh-muted: #8b949e;
+  --gh-accent: #58a6ff;
+  --gh-code-bg: #161b22;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--win-bg);
+  color: var(--win-text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* --- Desktop Container Reset --- */
+.desktop {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--win-bg);
+}
+
+/* Kills any old dots or overlays */
+.desktop::after {
+  display: none !important; 
+}
+
+/* Ensure desktop icons are clearly visible over the graphic */
+.desktop-item .item-label {
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9); 
+}
+html:not(.dark) .desktop-item .item-label {
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   2. EXPRESS LOGO SMART INVERSION (Dark Mode Readability)
+   ========================================================================== */
+html.dark .tech-icon-container img[alt="Express"] {
+  filter: invert(1) brightness(1.5);
+}
+
+.tech-icon-container {
+  width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 8px; padding: 4px;
+}
+
+/* ==========================================================================
+   3. WINDOWS 11 GROUPED TASKBAR PREVIEWS (Hover Stacks)
+   ========================================================================== */
+.taskbar-group { position: relative; display: flex; align-items: center; justify-content: center; }
+.win-preview-stack {
+  position: absolute; bottom: calc(100% + 5px); left: 50%; transform: translateX(-50%);
+  background: rgba(30, 30, 30, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 10px; display: flex; gap: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6); opacity: 0; pointer-events: none; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); z-index: 200;
+}
+.taskbar-group:hover .win-preview-stack { opacity: 1; pointer-events: auto; bottom: calc(100% + 12px); }
+.win-preview-card {
+  width: 160px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 6px; padding: 8px; cursor: pointer; transition: background 0.1s ease;
+}
+.win-preview-card:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); }
+.win-preview-header { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #fff; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 6px; }
+.win-preview-body { height: 70px; background: rgba(0,0,0,0.5); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 11px; text-align: center; padding: 8px; }
+.taskbar-icon.grouped { position: relative; }
+.taskbar-icon.grouped::after {
+  content: ''; position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); width: 6px; height: 3px; background: #888; border-radius: 2px; transition: width 0.2s ease, background 0.2s ease;
+}
+.taskbar-icon.grouped.active::after { background: #42a5f5; width: 16px; }
+
+/* ==========================================================================
+   4. ULTRA-PREMIUM MERN GLASSMORPHISM BACKGROUND
+   ========================================================================== */
+.premium-bg {
+  position: absolute; inset: 0; overflow: hidden; z-index: 0; background-color: var(--win-bg); transition: background-color 0.5s ease;
+}
+.blob {
+  position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.8; animation: premiumFloat 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+}
+html.dark .blob { opacity: 0.45; filter: blur(90px); }
+.react-blob { background: #61DAFB; width: 50vw; height: 50vw; top: -15%; right: -10%; animation-delay: 0s; }
+.node-blob { background: #68A063; width: 45vw; height: 45vw; bottom: -15%; left: -10%; animation-delay: -5s; }
+.mongo-blob { background: #47A248; width: 40vw; height: 40vw; top: 30%; left: 25%; animation-delay: -10s; }
+.express-blob { background: #888888; width: 35vw; height: 35vw; bottom: 20%; right: 20%; animation-delay: -15s; }
+
+.bg-glass {
+  position: absolute; inset: 0; backdrop-filter: blur(120px); -webkit-backdrop-filter: blur(120px); z-index: 1;
+}
+html:not(.dark) .bg-glass { background: rgba(248, 249, 250, 0.65); }
+html.dark .bg-glass { background: rgba(12, 12, 14, 0.8); }
+
+.premium-bg::after {
+  content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1.5px, transparent 1.5px); background-size: 32px 32px; z-index: 2; pointer-events: none;
+}
+html.dark .premium-bg::after { background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px); }
+
+@keyframes premiumFloat {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(6vw, 6vh) scale(1.15) rotate(45deg); }
+  100% { transform: translate(-6vw, -6vh) scale(0.9) rotate(90deg); }
+}
+
+/* --- Fixed Windows Desktop Shortcuts Grid Layout --- */
+.desktop-grid {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 16px;
+  height: calc(100vh - 100px);
+  z-index: 10;
+}
+
+/* --- Windows 11 Desktop Icons & Text Wrapping --- */
+.desktop-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 96px; /* Widened slightly to give text room to breathe */
+  padding: 8px 4px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.desktop-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+html:not(.dark) .desktop-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.desktop-item.selected {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+html:not(.dark) .desktop-item.selected {
+  background: rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.desktop-item .item-label {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--win-text);
+  text-align: center;
+  line-height: 1.3;
+  
+  /* Multi-line Wrapping Magic */
+  white-space: normal;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Allows up to 3 lines before adding ... */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  
+  /* Professional text shadow to ensure visibility on wallpapers */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8); 
+}
+
+/* Remove heavy shadow in light mode */
+html:not(.dark) .desktop-item .item-label {
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+/* --- Native Windows Explorer Frame Window --- */
+.win-window {
+  width: 860px;
+  height: 540px;
+  background-color: var(--win-surface);
+  backdrop-filter: blur(25px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid var(--win-border);
+  border-radius: 8px;
+  box-shadow: var(--win-shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: absolute;
+  z-index: 30;
+}
+
+.win-titlebar {
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 14px;
+  border-bottom: 1px solid var(--win-border);
+  cursor: move;
+}
+
+.win-title-info { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; }
+.win-actions { display: flex; height: 100%; }
+
+.action-btn {
+  background: none; border: none; width: 46px; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--win-text); cursor: pointer; font-size: 13px;
+}
+.action-btn:hover { background-color: var(--win-hover); }
+.btn-close:hover { background-color: #e81123 !important; color: #ffffff !important; }
+
+.win-navbar { height: 42px; border-bottom: 1px solid var(--win-border); display: flex; align-items: center; padding: 0 12px; gap: 12px; }
+.address-box {
+  flex: 1; height: 26px; border: 1px solid var(--win-border); border-radius: 4px;
+  background-color: rgba(0,0,0,0.01); display: flex; align-items: center; padding: 0 10px;
+  font-size: 11px; font-family: monospace;
+}
+.dark .address-box { background-color: rgba(255,255,255,0.02); }
+
+.explorer-body { flex: 1; display: flex; overflow: hidden; }
+.explorer-sidebar { width: 170px; background-color: var(--win-sidebar); border-right: 1px solid var(--win-border); padding: 12px 6px; }
+.sidebar-link { display: flex; align-items: center; gap: 8px; padding: 6px 10px; color: var(--win-text); font-size: 12px; border-radius: 4px; background: none; border: none; width: 100%; text-align: left; cursor: pointer; }
+.sidebar-link.active { background-color: var(--win-selected); color: var(--win-accent); }
+.explorer-view { flex: 1; padding: 20px; overflow-y: auto; background-color: var(--win-surface); }
+
+/* Window Modifiers */
+.win-window.maximized {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: calc(100vh - 48px) !important; /* Taskbar offset */
+  transform: none !important;
+  border-radius: 0 !important;
+}
+
+/* Custom Edge Resize Targets */
+.win-resize-handle {
+  position: absolute;
+  background: transparent;
+  z-index: 150;
+}
+.win-resize-handle.bottom-right {
+  width: 14px;
+  height: 14px;
+  right: 0;
+  bottom: 0;
+  cursor: se-resize;
+}
+.win-resize-handle.right {
+  width: 6px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  cursor: e-resize;
+}
+.win-resize-handle.bottom {
+  height: 6px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: s-resize;
+}
+
+/* --- Fixed Grid Layout Preventing Text Collision --- */
+.file-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); 
+  gap: 20px; 
+  padding: 10px;
+}
+
+.file-item { 
+  background: none; 
+  border: 1px solid transparent; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  padding: 12px 6px; 
+  cursor: pointer; 
+  border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.file-item:hover { 
+  background-color: var(--win-selected); 
+  border-color: var(--win-selected-border); 
+}
+
+/* Authentic Windows Multiline Wrapped File Labels */
+.file-label { 
+  font-size: 11px; 
+  font-weight: 500;
+  margin-top: 8px; 
+  color: var(--win-text); 
+  text-align: center; 
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Wraps cleanly after two lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.3;
+  max-width: 100%;
+}
+
+.tech-icon-container {
+  width: 44px; height: 44px; background-color: rgba(255,255,255,0.9);
+  border: 1px solid var(--win-border); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center; padding: 8px; box-sizing: border-box;
+}
+.dark .tech-icon-container { background-color: rgba(30, 41, 59, 0.8); }
+
+/* --- GITHUB MARKDOWN PANEL --- */
+.gh-readme-wrapper {
+  background-color: var(--gh-bg);
+  border: 1px solid var(--gh-border);
+  border-radius: 6px;
+  color: var(--win-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.gh-readme-topbar {
+  padding: 10px 16px;
+  background-color: var(--gh-code-bg);
+  border-bottom: 1px solid var(--gh-border);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.gh-readme-content {
+  padding: 24px 32px;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: left;
+  box-sizing: border-box;
+}
+.gh-h1 { font-size: 24px; font-weight: 600; border-bottom: 1px solid var(--gh-border); padding-bottom: 8px; margin-top: 0; margin-bottom: 16px; }
+.gh-h2 { font-size: 18px; font-weight: 600; border-bottom: 1px solid var(--gh-border); padding-bottom: 6px; margin-top: 24px; margin-bottom: 16px; }
+.gh-h3 { font-size: 14px; font-weight: 600; margin-top: 16px; margin-bottom: 6px; }
+.gh-ul { padding-left: 20px; margin-bottom: 16px; }
+.gh-li { margin-bottom: 4px; }
+.gh-code-block {
+  background-color: var(--gh-code-bg);
+  border: 1px solid var(--gh-border);
+  border-radius: 6px;
+  padding: 14px;
+  font-family: 'Consolas', monospace;
+  font-size: 12px;
+  margin: 14px 0;
+  white-space: pre-wrap;
+  text-align: left;
+}
+
+/* --- Context Menu & Taskbar Launchpad --- */
+.context-menu { position: absolute; background-color: var(--win-surface); backdrop-filter: blur(15px); border: 1px solid var(--win-border); border-radius: 6px; box-shadow: var(--win-shadow); padding: 4px 0; width: 160px; z-index: 200; }
+.context-item { width: 100%; background: none; border: none; text-align: left; padding: 6px 14px; font-size: 12px; color: var(--win-text); cursor: pointer; }
+.context-item:hover { background-color: var(--win-hover); }
+.start-menu { position: absolute; bottom: 56px; left: 50%; transform: translateX(-50%); width: 440px; height: 340px; background-color: var(--win-surface); backdrop-filter: blur(20px); border: 1px solid var(--win-border); border-radius: 8px; box-shadow: var(--win-shadow); z-index: 90; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
+.start-section-title { font-size: 11px; font-weight: 700; color: var(--win-text-muted); text-transform: uppercase; }
+.start-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 12px; }
+.start-app-btn { background: none; border: none; display: flex; flex-direction: column; align-items: center; cursor: pointer; padding: 4px; border-radius: 4px; }
+.start-app-btn:hover { background-color: var(--win-selected); }
+.start-app-label { font-size: 11px; color: var(--win-text); margin-top: 4px; text-align: center; }
+.start-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--win-border); padding-top: 12px; }
+.taskbar { position: absolute; bottom: 0; left: 0; width: 100vw; height: 48px; background-color: var(--win-taskbar); backdrop-filter: blur(20px); border-top: 1px solid var(--win-border); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; box-sizing: border-box; z-index: 100; }
+.taskbar-center { position: absolute; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
+.taskbar-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: none; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.1s; }
+.taskbar-icon:hover { background-color: rgba(255,255,255,0.15); }
+.taskbar-icon.active { background-color: var(--win-selected); position: relative; }
+.taskbar-icon.active::after { content: ''; position: absolute; bottom: 2px; width: 16px; height: 3px; background-color: var(--win-accent); border-radius: 2px; }
+.taskbar-right { font-size: 11px; color: var(--win-text); text-align: right; line-height: 1.3; }
+
+/* --- Windows 11 Grouped Taskbar Preview Stacks --- */
+.taskbar-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.win-preview-stack {
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(30, 30, 30, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 200;
+}
+
+.taskbar-group:hover .win-preview-stack {
+  opacity: 1;
+  pointer-events: auto;
+  bottom: calc(100% + 12px);
+}
+
+.win-preview-card {
+  width: 160px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.win-preview-card:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.25);
+}
+
+.win-preview-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #fff;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 6px;
+}
+
+.win-preview-body {
+  height: 70px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 11px;
+  text-align: center;
+  padding: 8px;
+}
+
+/* Windows 11 Active App Indicator Dots */
+.taskbar-icon.grouped {
+  position: relative;
+}
+.taskbar-icon.grouped::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 3px;
+  background: #888;
+  border-radius: 2px;
+  transition: width 0.2s ease, background 0.2s ease;
+}
+.taskbar-icon.grouped.active::after {
+  background: #42a5f5;
+  width: 16px;
+}
+
+/* --- Smart Tech Icon Inversions for Dark Mode --- */
+
+/* Inverts black logos to white automatically when the user is in Dark Mode */
+html.dark .tech-icon-container img[alt="Express"] {
+  filter: invert(1) brightness(1.5);
+}
+
+/* General tech icon styling to ensure they stay perfectly centered */
+.tech-icon-container {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  padding: 4px;
+}
