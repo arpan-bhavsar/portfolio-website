@@ -1,16 +1,32 @@
-# React + Vite
+# 🖥️ Arpan Bhavsar | Developer Portfolio OS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to my personal portfolio! This site is built to mimic a modern Windows 11 desktop environment, allowing users to interact with my projects through a file-explorer style interface.
 
-Currently, two official plugins are available:
+## 🔗 Live Demo
+Access the full OS portfolio here: [https://portfolio-website-omega-steel-67.vercel.app/](https://portfolio-website-omega-steel-67.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Overview
+This portfolio is a creative, interactive Single Page Application (SPA) designed to showcase my journey as a Computer Science & Engineering student. Instead of a traditional scrolling site, I have built a functional OS-themed dashboard where projects are accessed as "files" and "folders."
 
-## React Compiler
+## 🛠️ Tech Stack
+*   **Frontend:** React.js (Vite)
+*   **State Management:** React Hooks
+*   **Styling:** CSS3 (Custom Glassmorphism)
+*   **Icons:** Lucide React
+*   **Deployment:** Vercel (CI/CD)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📁 Projects Included
+This portfolio serves as a hub for my core engineering projects:
 
-## Expanding the ESLint configuration
+1.  **Complaint Management System (MERN Stack)**: [GitHub Repository](https://github.com/arpan-bhavsar/complaint-management-system)
+2.  **Smart Energy Grid Platform**: [GitHub Repository](https://github.com/arpan-bhavsar/smart-energy-grid-platform)
+3.  **DMart Sales Intelligence Dashboard**: [GitHub Repository](https://github.com/arpan-bhavsar/sales-forecasting-project)
+4.  **Smart Stick for Visually Impaired**: [GitHub Repository](https://github.com/arpan-bhavsar/Smart-Blind-Stick)
+5.  **Industrial Motor Vibration Monitor**: [GitHub Repository](https://github.com/arpan-bhavsar/industrial-motor-telemetry)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 👤 About Me
+I am a Computer Science & Engineering student with a passion for software development, full-stack web applications, and innovative IT solutions. My technical toolkit includes Java, Python, C++, and a deep specialization in the MERN stack.
+
+---
+
+*Note: This repository is actively maintained. If you would like to collaborate on my projects or have suggestions for the UI, feel free to open an issue or reach out via email at arpanjbhavsar123@gmail.com.*
