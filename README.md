@@ -3,7 +3,7 @@
 Welcome to my personal portfolio! This site is built to mimic a modern Windows 11 desktop environment, allowing users to interact with my projects through a file-explorer style interface.
 
 ## 🔗 Live Demo
-Access the full OS portfolio here: [Live Link](https://portfolio-website-s73k-git-main-arpan-bhavsars-projects.vercel.app/)
+Access the full OS portfolio here: [Live Link](https://portfolio-website-s73k.vercel.app)
 
 ## 🚀 Overview
 This portfolio is a creative, interactive Single Page Application (SPA) designed to showcase my journey as a Computer Science & Engineering student. Instead of a traditional scrolling site, I have built a functional OS-themed dashboard where projects are accessed as "files" and "folders."
