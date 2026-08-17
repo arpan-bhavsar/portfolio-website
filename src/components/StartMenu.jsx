@@ -32,7 +32,7 @@ export default function StartMenu({ onOpenApp, projects, onShutdown }) {
         <SocialFlipButton />
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ width: 28, height: 28, borderRadius: '50%', backgroundColor: 'var(--win-accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 11, fontWeight: 'bold' }}>AB</div>
+            <img src="/Photo.PNG" alt="Arpan Bhavsar" style={{ width: 28, height: 28, borderRadius: '50%', objectFit: 'cover' }} />
             <span style={{ fontSize: 12, fontWeight: '600', color: 'var(--win-text)' }}>Arpan Bhavsar</span>
           </div>
           <button 
