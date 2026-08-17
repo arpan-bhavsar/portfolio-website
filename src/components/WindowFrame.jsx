@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import WindowContainer from './WindowContainer';
 import { Folder, ArrowLeft, HardDrive, Monitor, Image, FileText } from 'lucide-react';
 
-export default function WindowFrame({ project, onClose, onOpenReadme, onOpenImage, isMinimized, zIndex, onFocus, onMinimize }) {
+export default function WindowFrame({ project, onClose, onOpenReadme, onOpenImage, onOpenBrowser, isMinimized, zIndex, onFocus, onMinimize }) {
   const [layer, setLayer] = useState('root');
 
   return (
@@ -48,10 +48,10 @@ export default function WindowFrame({ project, onClose, onOpenReadme, onOpenImag
                 <span className="file-label">{project.isBio ? 'About_Me.txt' : 'README.txt'}</span>
               </div>
               {project.liveUrl && (
-                <a href={project.liveUrl} target="_blank" rel="noreferrer" className="file-item" style={{ textDecoration: 'none' }}>
+                <div className="file-item" onDoubleClick={() => onOpenBrowser(project)}>
                   <Monitor size={40} style={{ color: 'var(--win-accent)' }} />
                   <span className="file-label">execute_live.exe</span>
-                </a>
+                </div>
               )}
             </div>
           )}

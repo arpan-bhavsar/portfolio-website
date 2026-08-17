@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Monitor, Sun, Moon } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Monitor, Sun, Moon, Wifi, Volume2, BatteryCharging } from 'lucide-react';
 
-export default function Taskbar({ darkMode, setDarkMode, activeWindow }) {
+export default function Taskbar({ darkMode, setDarkMode, activeWindow, onToggleQuickSettings }) {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -21,11 +21,22 @@ export default function Taskbar({ darkMode, setDarkMode, activeWindow }) {
         </button>
       </div>
 
-      <div className="taskbar-right">
-        <span>{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-        <span style={{ marginTop: '2px', fontSize: '10px', opacity: 0.8 }}>
-          {time.toLocaleDateString([], { day: '2-digit', month: '2-digit', year: 'numeric' })}
-        </span>
+      <div className="taskbar-right" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <button
+          onClick={onToggleQuickSettings}
+          className="taskbar-icon text-[var(--win-text)]"
+          style={{ display: 'flex', gap: '6px', padding: '0 8px', borderRadius: '4px' }}
+        >
+          <Wifi size={14} />
+          <Volume2 size={14} />
+          <BatteryCharging size={14} />
+        </button>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', padding: '0 8px' }}>
+          <span>{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+          <span style={{ marginTop: '2px', fontSize: '10px', opacity: 0.8 }}>
+            {time.toLocaleDateString([], { day: '2-digit', month: '2-digit', year: 'numeric' })}
+          </span>
+        </div>
       </div>
     </footer>
   );

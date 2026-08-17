@@ -1,10 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import WindowFrame from './components/WindowFrame';
 import ContextMenu from './components/ContextMenu';
 import StartMenu from './components/StartMenu';
 import MarkdownReader from './components/MarkdownReader';
 import PhotosViewer from './components/PhotosViewer';
-import { Folder, FileText, Monitor, Image, Sun, Moon } from 'lucide-react';
+import TerminalApp from './components/TerminalApp';
+import BrowserApp from './components/BrowserApp';
+import CalculatorApp from './components/CalculatorApp';
+import NotificationToast from './components/NotificationToast';
+import QuickSettings from './components/QuickSettings';
+import BootScreen from './components/BootScreen';
+import DesktopWidget from './components/DesktopWidget';
+import Landing3D from './components/landing/Landing3D';
+import { Folder, FileText, Monitor, Image, Terminal, Globe, Wifi, Volume2, BatteryCharging, Calculator, X } from 'lucide-react';
 import './App.css';
 
 const projects = [
@@ -12,7 +20,7 @@ const projects = [
     id: "complaint-management-system",
     folderName: "complaint-management-system",
     title: "Complaint Management System (MERN)",
-    liveUrl: "https://complaint-management-system-sigma-plum.vercel.app/", 
+    liveUrl: "https://complaint-management-system-sigma-plum.vercel.app/",
     github: "https://github.com/arpan-bhavsar/complaint-management-system",
     technologies: [
       { name: "MongoDB", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
@@ -179,7 +187,7 @@ const projects = [
     id: "sales-forecasting-project",
     folderName: "sales-forecasting-project",
     title: "DMart Sales Intelligence Dashboard",
-    liveUrl: "https://sales-forecasting-project-fvp9hdsch3rrng5v8as5bu.streamlit.app/", 
+    liveUrl: "https://sales-forecasting-project-fvp9hdsch3rrng5v8as5bu.streamlit.app/",
     github: "https://github.com/arpan-bhavsar/sales-forecasting-project",
     technologies: [
       { name: "Python", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
@@ -376,7 +384,10 @@ const bioHTML = `
 const appIcons = {
   explorer: { Icon: Folder, color: '#ffca28' },
   reader: { Icon: FileText, color: '#42a5f5' },
-  photos: { Icon: Image, color: '#22c55e' }
+  photos: { Icon: Image, color: '#66bb6a' },
+  terminal: { Icon: Terminal, color: '#0ea5e9' },
+  browser: { Icon: Globe, color: '#f97316' },
+  calculator: { Icon: Calculator, color: '#10b981' }
 };
 
 // =========================================================================================
@@ -384,61 +395,66 @@ const appIcons = {
 // =========================================================================================
 const MernWallpaper = ({ darkMode }) => {
   // Desktop Base Background
-  const bg = darkMode ? '#111827' : '#f0f4f8';
+  const bg = darkMode ? '#000000' : '#f8fafc';
 
   // Individual Brand Colors for the M E R N letters
-  const colorM = darkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(71, 162, 72, 0.18)';  // MongoDB Emerald
-  const colorE = darkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(100, 100, 100, 0.15)'; // Express Slate
-  const colorR = darkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(97, 218, 251, 0.18)'; // React Cyan
-  const colorN = darkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(104, 160, 99, 0.18)'; // Node Green
+  // Dark mode: White. Light mode: Ultra-Vibrant Colorful
+  const colorM = darkMode ? '#ffffffa4' : '#10b981';  // Emerald
+  const colorE = darkMode ? '#ffffffa4' : '#64748b';  // Slate
+  const colorR = darkMode ? '#ffffffa4' : '#0ea5e9';  // Sky Blue
+  const colorN = darkMode ? '#ffffffa4' : '#22c55e';  // Green
 
   // Corresponding Stroke Colors for the 4 explicit logos
-  const strokeM = darkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(71, 162, 72, 0.3)';
-  const strokeE = darkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(100, 100, 100, 0.25)';
-  const strokeR = darkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(97, 218, 251, 0.3)';
-  const strokeN = darkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(104, 160, 99, 0.3)';
+  const strokeM = darkMode ? 'rgba(255, 255, 255, 0.3)' : '#10b981';
+  const strokeE = darkMode ? 'rgba(255, 255, 255, 0.3)' : '#64748b';
+  const strokeR = darkMode ? 'rgba(255, 255, 255, 0.3)' : '#0ea5e9';
+  const strokeN = darkMode ? 'rgba(255, 255, 255, 0.3)' : '#22c55e';
+
+  // Drop shadow for that "wow" 3D pop in light mode
+  const filterStyle = {
+    transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+    filter: darkMode ? 'none' : 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))'
+  };
+
+  const svgAnim = { transition: 'fill 0.8s ease, stroke 0.8s ease' };
 
   return (
-    <div style={{ position: 'absolute', inset: 0, zIndex: 0, backgroundColor: bg, transition: 'background-color 0.4s ease', overflow: 'hidden' }}>
-      
-      {/* 
-        CRITICAL FIX: viewBox ensures this SVG acts exactly like a rigid 16:9 monitor 
-        and preserves the exact x/y positions of shapes no matter your browser size.
-      */}
-      <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-        
+    <div style={{ position: 'absolute', inset: 0, zIndex: 0, backgroundColor: bg, transition: 'background-color 0.8s ease', overflow: 'hidden' }}>
+
+      <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style={filterStyle}>
+
         {/* Center Massive Typography - Colored Individually */}
         <text x="960" y="540" fontFamily="Arial Black, Impact, system-ui, sans-serif" fontSize="480" fontWeight="900" textAnchor="middle" dominantBaseline="central" letterSpacing="25">
-          <tspan fill={colorM}>M</tspan>
-          <tspan fill={colorE}>E</tspan>
-          <tspan fill={colorR}>R</tspan>
-          <tspan fill={colorN}>N</tspan>
+          <tspan fill={colorM} style={svgAnim}>M</tspan>
+          <tspan fill={colorE} style={svgAnim}>E</tspan>
+          <tspan fill={colorR} style={svgAnim}>R</tspan>
+          <tspan fill={colorN} style={svgAnim}>N</tspan>
         </text>
 
-        {/* 1. MONGODB LEAF (Top Left) - Shifted right to avoid desktop folders */}
-        <g transform="translate(450, 250) scale(1.6)" fill="none" stroke={strokeM} strokeWidth="2.5">
+        {/* 1. MONGODB LEAF (Top Left) */}
+        <g transform="translate(450, 250) scale(1.6)" fill="none" stroke={strokeM} strokeWidth="2.5" style={svgAnim}>
           <path d="M 0 -80 C 80 -40, 100 80, 0 120 C -100 80, -80 -40, 0 -80 Z" />
           <path d="M 0 -80 L 0 120" strokeWidth="1.5" />
         </g>
 
-        {/* 2. NODE.JS HEXAGON (Bottom Left) - Shifted right to avoid desktop folders */}
-        <g transform="translate(450, 850) scale(2.2)" fill="none" stroke={strokeN} strokeWidth="2">
+        {/* 2. NODE.JS HEXAGON (Bottom Left) */}
+        <g transform="translate(450, 850) scale(2.2)" fill="none" stroke={strokeN} strokeWidth="2" style={svgAnim}>
           <polygon points="0,-45 39,-22.5 39,22.5 0,45 -39,22.5 -39,-22.5" />
           <polygon points="0,-25 21.6,-12.5 21.6,12.5 0,25 -21.6,12.5 -21.6,-12.5" strokeWidth="1" />
         </g>
 
         {/* 3. EXPRESS.JS LOGO (Top Right) */}
-        <g transform="translate(1500, 250)" fill="none" stroke={strokeE} strokeWidth="3">
-          <text x="0" y="5" fontFamily="system-ui, sans-serif" fontSize="140" fontWeight="200" textAnchor="middle" dominantBaseline="central" letterSpacing="-5">ex</text>
+        <g transform="translate(1500, 250)" fill="none" stroke={strokeE} strokeWidth="3" style={svgAnim}>
+          <text x="0" y="5" fontFamily="system-ui, sans-serif" fontSize="140" fontWeight="200" textAnchor="middle" dominantBaseline="central" letterSpacing="-5" fill={strokeE} stroke="none" style={svgAnim}>ex</text>
           <circle cx="0" cy="0" r="120" strokeWidth="2" strokeDasharray="15 10" />
         </g>
 
         {/* 4. REACT ATOM (Bottom Right) */}
-        <g transform="translate(1500, 850) scale(2.6)">
-          <ellipse cx="0" cy="0" rx="90" ry="28" fill="none" stroke={strokeR} strokeWidth="1.5" transform="rotate(30)" />
-          <ellipse cx="0" cy="0" rx="90" ry="28" fill="none" stroke={strokeR} strokeWidth="1.5" transform="rotate(90)" />
-          <ellipse cx="0" cy="0" rx="90" ry="28" fill="none" stroke={strokeR} strokeWidth="1.5" transform="rotate(150)" />
-          <circle cx="0" cy="0" r="10" fill={strokeR} />
+        <g transform="translate(1500, 850) scale(2.6)" style={svgAnim}>
+          <ellipse cx="0" cy="0" rx="90" ry="28" fill="none" stroke={strokeR} strokeWidth="1.5" transform="rotate(30)" style={svgAnim} />
+          <ellipse cx="0" cy="0" rx="90" ry="28" fill="none" stroke={strokeR} strokeWidth="1.5" transform="rotate(90)" style={svgAnim} />
+          <ellipse cx="0" cy="0" rx="90" ry="28" fill="none" stroke={strokeR} strokeWidth="1.5" transform="rotate(150)" style={svgAnim} />
+          <circle cx="0" cy="0" r="10" fill={strokeR} style={svgAnim} />
         </g>
 
       </svg>
@@ -451,6 +467,10 @@ const MernWallpaper = ({ darkMode }) => {
 // =========================================================================================
 
 export default function App() {
+  const [showLanding, setShowLanding] = useState(true);
+  const [booting, setBooting] = useState(true);
+  // Skipped login screen based on user preference
+  const [loggedIn, setLoggedIn] = useState(true);
   const [darkMode, setDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
     return savedTheme ? savedTheme === 'dark' : true;
@@ -460,9 +480,16 @@ export default function App() {
   const [startOpen, setStartOpen] = useState(false);
   const [time, setTime] = useState(new Date());
 
-  const [windows, setWindows] = useState([]); 
+  // Interactive Desktop Selection Box
+  const [selectionBox, setSelectionBox] = useState(null);
+
+  const [windows, setWindows] = useState([]);
   const [windowOrder, setWindowOrder] = useState([]);
   const [focusedWindow, setFocusedWindow] = useState(null);
+
+  // Notification State
+  const [notification, setNotification] = useState(null);
+  const [showQuickSettings, setShowQuickSettings] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -473,6 +500,17 @@ export default function App() {
     document.documentElement.classList.toggle('dark', darkMode);
     localStorage.setItem('theme', darkMode ? 'dark' : 'light');
   }, [darkMode]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      setTimeout(() => {
+        setNotification({
+          title: 'System Online',
+          message: 'Welcome to Arpan\'s Portfolio OS. All systems nominal.'
+        });
+      }, 1000);
+    }
+  }, [loggedIn]);
 
   const focusWindow = (id) => {
     setWindowOrder(prev => {
@@ -539,13 +577,70 @@ export default function App() {
     return acc;
   }, {});
 
+  if (showLanding) {
+    return <Landing3D onEnterOS={() => setShowLanding(false)} />;
+  }
+
+  if (booting) {
+    return <BootScreen onComplete={() => {
+      setBooting(false);
+      // Trigger the welcome notification immediately since we skip login
+      setTimeout(() => {
+        setNotification({
+          title: 'System Online',
+          message: 'Welcome to Arpan\'s Portfolio OS. All systems nominal.'
+        });
+      }, 1000);
+    }} />;
+  }
+
+  const handleDesktopMouseDown = (e) => {
+    // Only trigger if clicking directly on the desktop background
+    if (e.target.closest('.desktop-item') || e.target.closest('.win-window') || e.target.closest('.taskbar') || e.target.closest('.context-menu') || e.target.closest('.start-menu')) {
+      return;
+    }
+    setSelectionBox({ startX: e.clientX, startY: e.clientY, currentX: e.clientX, currentY: e.clientY });
+  };
+
+  const handleDesktopMouseMove = (e) => {
+    if (selectionBox) {
+      setSelectionBox({ ...selectionBox, currentX: e.clientX, currentY: e.clientY });
+    }
+  };
+
+  const handleDesktopMouseUp = () => {
+    setSelectionBox(null);
+  };
+
   return (
-    <div className="desktop" 
-         onClick={() => { setSelectedId(null); setContextMenu(null); setStartOpen(false); }}
-         onContextMenu={(e) => { e.preventDefault(); setContextMenu({ x: e.clientX, y: e.clientY }); setStartOpen(false); }}>
-      
-      {/* 100% Custom 4-Logo MERN Wallpaper */}
+    <div className="desktop animate-in fade-in duration-1000"
+      onClick={() => { setSelectedId(null); setContextMenu(null); setStartOpen(false); }}
+      onContextMenu={(e) => { e.preventDefault(); setContextMenu({ x: e.clientX, y: e.clientY }); setStartOpen(false); }}
+      onMouseDown={handleDesktopMouseDown}
+      onMouseMove={handleDesktopMouseMove}
+      onMouseUp={handleDesktopMouseUp}
+      onMouseLeave={handleDesktopMouseUp}>
+
+      {/* The Requested MERN Wallpaper */}
       <MernWallpaper darkMode={darkMode} />
+
+      <DesktopWidget />
+
+      {selectionBox && (
+        <div
+          style={{
+            position: 'absolute',
+            left: Math.min(selectionBox.startX, selectionBox.currentX),
+            top: Math.min(selectionBox.startY, selectionBox.currentY),
+            width: Math.abs(selectionBox.currentX - selectionBox.startX),
+            height: Math.abs(selectionBox.currentY - selectionBox.startY),
+            backgroundColor: 'rgba(0, 120, 212, 0.3)',
+            border: '1px solid rgba(0, 120, 212, 0.8)',
+            zIndex: 40,
+            pointerEvents: 'none'
+          }}
+        />
+      )}
 
       <div className="desktop-grid" style={{ zIndex: 10 }}>
         {projects.map(p => (
@@ -563,35 +658,70 @@ export default function App() {
           <FileText size={44} style={{ color: '#42a5f5', filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.12))' }} />
           <span className="item-label">About_Me.txt</span>
         </button>
+
+        <button className={`desktop-item ${selectedId === 'terminal' ? 'selected' : ''}`}
+          onClick={(e) => { e.stopPropagation(); setSelectedId('terminal'); setContextMenu(null); }}
+          onDoubleClick={() => openWindow('terminal', { title: "Command Prompt" }, 'terminal-app')}>
+          <Terminal size={44} style={{ color: '#0ea5e9', filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.12))' }} />
+          <span className="item-label">Terminal</span>
+        </button>
       </div>
 
       {windows.map(w => {
         if (w.type === 'explorer') {
           return (
-            <WindowFrame 
+            <WindowFrame
               key={w.id} project={w.data} isMinimized={w.isMinimized} zIndex={getZIndex(w.id)}
               onFocus={() => focusWindow(w.id)} onMinimize={() => toggleMinimize(w.id)} onClose={() => closeWindow(w.id)}
               onOpenReadme={(p) => openWindow('reader', { title: "README.md", readmeHTML: p.readmeHTML, projectName: p.title }, `reader-${p.id}`)}
               onOpenImage={(img) => openWindow('photos', { ...img, projectName: w.data.title }, `photo-${img.name}`)}
+              onOpenBrowser={(p) => openWindow('browser', { title: `Browser - ${p.title}`, url: p.liveUrl }, `browser-${p.id}`)}
             />
           );
         }
         if (w.type === 'reader') {
           return (
-            <MarkdownReader 
-              key={w.id} 
-              title={w.data.projectName ? `${w.data.title} - ${w.data.projectName}` : w.data.title} 
+            <MarkdownReader
+              key={w.id}
+              title={w.data.projectName ? `${w.data.title} - ${w.data.projectName}` : w.data.title}
               content={w.data.readmeHTML} isMinimized={w.isMinimized} zIndex={getZIndex(w.id)}
-              onFocus={() => focusWindow(w.id)} onMinimize={() => toggleMinimize(w.id)} onClose={() => closeWindow(w.id)} 
+              onFocus={() => focusWindow(w.id)} onMinimize={() => toggleMinimize(w.id)} onClose={() => closeWindow(w.id)}
             />
           );
         }
         if (w.type === 'photos') {
           return (
-            <PhotosViewer 
-              key={w.id} 
+            <PhotosViewer
+              key={w.id}
               image={w.data} isMinimized={w.isMinimized} zIndex={getZIndex(w.id)}
-              onFocus={() => focusWindow(w.id)} onMinimize={() => toggleMinimize(w.id)} onClose={() => closeWindow(w.id)} 
+              onFocus={() => focusWindow(w.id)} onMinimize={() => toggleMinimize(w.id)} onClose={() => closeWindow(w.id)}
+            />
+          );
+        }
+        if (w.type === 'terminal') {
+          return (
+            <TerminalApp
+              key={w.id}
+              title={w.data.title} isMinimized={w.isMinimized} zIndex={getZIndex(w.id)}
+              onFocus={() => focusWindow(w.id)} onMinimize={() => toggleMinimize(w.id)} onClose={() => closeWindow(w.id)}
+            />
+          );
+        }
+        if (w.type === 'browser') {
+          return (
+            <BrowserApp
+              key={w.id}
+              title={w.data.title} url={w.data.url} isMinimized={w.isMinimized} zIndex={getZIndex(w.id)}
+              onFocus={() => focusWindow(w.id)} onMinimize={() => toggleMinimize(w.id)} onClose={() => closeWindow(w.id)}
+            />
+          );
+        }
+        if (w.type === 'calculator') {
+          return (
+            <CalculatorApp
+              key={w.id}
+              title={w.data.title} isMinimized={w.isMinimized} zIndex={getZIndex(w.id)}
+              onFocus={() => focusWindow(w.id)} onMinimize={() => toggleMinimize(w.id)} onClose={() => closeWindow(w.id)}
             />
           );
         }
@@ -601,33 +731,49 @@ export default function App() {
       {contextMenu && (
         <ContextMenu x={contextMenu.x} y={contextMenu.y} onClose={() => setContextMenu(null)} onToggleTheme={() => setDarkMode(!darkMode)} />
       )}
-      {startOpen && <StartMenu onOpenApp={(p) => { openWindow('explorer', p, `explorer-${p.id}`); setStartOpen(false); }} projects={projects} />}
+      {startOpen && <StartMenu onOpenApp={(type, data, customId) => { openWindow(type, data, customId); setStartOpen(false); }} projects={projects} onShutdown={() => {
+        if (document.referrer) {
+          window.location.href = document.referrer;
+        } else if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          window.location.href = "about:blank";
+        }
+      }} />}
 
-      <footer className="taskbar" style={{ zIndex: 100 }} onClick={(e) => e.stopPropagation()}>
+      {notification && (
+        <NotificationToast
+          title={notification.title}
+          message={notification.message}
+          onClose={() => setNotification(null)}
+        />
+      )}
+
+      <footer className="taskbar" style={{ zIndex: 1000 }} onClick={(e) => e.stopPropagation()}>
         <div />
         <div className="taskbar-center">
           <button className={`taskbar-icon ${startOpen ? 'active' : ''}`} onClick={() => setStartOpen(!startOpen)}>
             <Monitor size={20} style={{ color: 'var(--win-accent)' }} />
           </button>
-          
+
           {Object.entries(groupedWindows).map(([type, group]) => {
             const { Icon, color } = appIcons[type];
             const isActive = group.some(w => focusedWindow === w.id);
-            
+
             return (
               <div key={type} className="taskbar-group">
-                <button 
-                  className={`taskbar-icon grouped ${isActive ? 'active' : ''}`} 
+                <button
+                  className={`taskbar-icon grouped ${isActive ? 'active' : ''}`}
                   onClick={() => { if (group.length === 1) handleTaskbarClick(group[0].id); }}
                 >
                   <Icon size={20} style={{ color }} />
                 </button>
-                
+
                 <div className="win-preview-stack">
                   {group.map(w => {
                     let displayTitle = '';
                     let displaySubtitle = '';
-                    
+
                     if (w.type === 'explorer') {
                       displayTitle = w.data.folderName;
                       displaySubtitle = w.data.title;
@@ -641,9 +787,19 @@ export default function App() {
 
                     return (
                       <div key={w.id} className="win-preview-card" onClick={(e) => { e.stopPropagation(); handleTaskbarClick(w.id); }}>
-                        <div className="win-preview-header">
-                          <Icon size={12} style={{ color, flexShrink: 0 }} />
-                          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }} title={displayTitle}>{displayTitle}</span>
+                        <div className="win-preview-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', overflow: 'hidden' }}>
+                            <Icon size={12} style={{ color, flexShrink: 0 }} />
+                            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={displayTitle}>{displayTitle}</span>
+                          </div>
+                          <button 
+                            onClick={(e) => { e.stopPropagation(); closeWindow(w.id); }}
+                            style={{ background: 'transparent', border: 'none', color: 'inherit', cursor: 'pointer', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '4px', opacity: 0.7 }}
+                            onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.background = 'rgba(255, 0, 0, 0.5)'; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.7; e.currentTarget.style.background = 'transparent'; }}
+                          >
+                            <X size={12} />
+                          </button>
                         </div>
                         <div className="win-preview-body" style={{ padding: '6px', fontSize: '11px', lineHeight: '1.3', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                           <span style={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
@@ -658,22 +814,27 @@ export default function App() {
             )
           })}
         </div>
-        <div className="taskbar-right" style={{ display: 'flex', alignItems: 'center', gap: '12px', paddingRight: '12px' }}>
-          <button 
-            onClick={() => setDarkMode(!darkMode)} 
-            style={{ background: 'transparent', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', color: 'var(--win-text)' }} 
-            title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+        <div className="taskbar-right" style={{ display: 'flex', alignItems: 'center', gap: '8px', paddingRight: '12px' }}>
+          <button
+            onClick={() => setShowQuickSettings(!showQuickSettings)}
+            className="taskbar-icon text-[var(--win-text)]"
+            style={{ width: 'auto', display: 'flex', gap: '8px', padding: '0 12px', borderRadius: '4px', background: 'transparent', border: 'none', cursor: 'pointer' }}
           >
-            {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+            <Wifi size={18} />
+            <Volume2 size={18} />
+            <BatteryCharging size={18} />
           </button>
-          <div style={{ textAlign: 'right' }}>
-            <div>{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
-            <div style={{ fontSize: '10px', opacity: 0.7, marginTop: '2px' }}>
+          <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', padding: '0 4px' }}>
+            <span style={{ fontSize: '12px' }}>{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+            <span style={{ fontSize: '10px', opacity: 0.8, marginTop: '2px' }}>
               {time.toLocaleDateString([], { day: '2-digit', month: '2-digit', year: 'numeric' })}
-            </div>
+            </span>
           </div>
         </div>
       </footer>
+      {showQuickSettings && (
+        <QuickSettings darkMode={darkMode} setDarkMode={setDarkMode} onClose={() => setShowQuickSettings(false)} />
+      )}
     </div>
   );
 }

@@ -1,8 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function WindowContainer({ defaultWidth, defaultHeight, title, icon, isMinimized, zIndex, onFocus, onMinimize, onClose, children }) {
   const [size, setSize] = useState({ width: defaultWidth, height: defaultHeight });
-  const [pos, setPos] = useState({ x: window.innerWidth / 2 - defaultWidth / 2 + (Math.random() * 40 - 20), y: window.innerHeight / 2 - defaultHeight / 2 + (Math.random() * 40 - 20) });
+  const [pos, setPos] = useState(() => ({
+    x: Math.max(20, Math.round((window.innerWidth - defaultWidth) / 2)),
+    y: Math.max(20, Math.round((window.innerHeight - defaultHeight) / 2))
+  }));
   const [isMaximized, setIsMaximized] = useState(false);
   
   const stateRef = useRef({ isDragging: false, isResizing: false, resizeType: null, startX: 0, startY: 0, startW: 0, startH: 0, startXPos: 0, startYPos: 0 });

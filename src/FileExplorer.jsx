@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Folder, FileText, Code, Globe, ChevronRight, Terminal, Menu } from 'lucide-react';
+import { useState } from 'react';
+import { Folder, FileText, Code, Globe, Terminal } from 'lucide-react';
 
 // 1. Define your projects data structure
 const projectsData = {

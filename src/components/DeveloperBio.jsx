@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function DeveloperBio() {
   return (
     <div className="bio-wrapper">
