@@ -52,7 +52,7 @@ export default function WindowContainer({ defaultWidth, defaultHeight, title, ic
 
   return (
     <div 
-      className={`win-window ${isMaximized ? 'maximized' : ''} animate-in fade-in zoom-in-98 duration-150`}
+      className={`win-window backdrop-blur-[40px] ${isMaximized ? 'maximized' : ''} animate-in fade-in zoom-in-98 duration-150`}
       style={{ 
         display: isMinimized ? 'none' : 'flex',
         left: isMaximized ? 0 : pos.x, top: isMaximized ? 0 : pos.y, 

@@ -3,7 +3,7 @@ import SocialFlipButton from './SocialFlipButton';
 
 export default function StartMenu({ onOpenApp, projects, onShutdown }) {
   return (
-    <div className="start-menu" style={{ zIndex: 1200 }}>
+    <div className="start-menu backdrop-blur-[32px]" style={{ zIndex: 1200 }}>
       <div>
         <span className="start-section-title">Pinned Applications & Projects</span>
         <div className="start-grid">

@@ -10,7 +10,7 @@ export default function Taskbar({ darkMode, setDarkMode, activeWindow, onToggleQ
   }, []);
 
   return (
-    <footer className="taskbar">
+    <footer className="taskbar backdrop-blur-[28px]">
       <button onClick={() => setDarkMode(!darkMode)} className="taskbar-icon text-[var(--win-text)]">
         {darkMode ? <Sun size={18} style={{ color: 'var(--win-accent)' }} /> : <Moon size={18} />}
       </button>

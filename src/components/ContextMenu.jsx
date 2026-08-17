@@ -1,6 +1,6 @@
 export default function ContextMenu({ x, y, onClose, onToggleTheme }) {
   return (
-    <div className="context-menu" style={{ top: y, left: x }} onClick={onClose}>
+    <div className="context-menu backdrop-blur-[24px]" style={{ top: y, left: x }} onClick={onClose}>
       <button className="context-item" onClick={() => window.location.reload()}>Refresh System</button>
       <div style={{ height: '1px', background: 'var(--win-border)', margin: '4px 0' }} />
       <button className="context-item" onClick={onToggleTheme}>Toggle Color Theme</button>
