@@ -265,8 +265,8 @@ html:not(.dark) .desktop-item .item-label {
   width: 860px;
   height: 540px;
   background-color: var(--win-surface);
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-top: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 12px;
@@ -469,7 +469,7 @@ html:not(.dark) .win-window {
 .context-menu { position: absolute; background-color: var(--win-surface); backdrop-filter: blur(24px); border: 1px solid var(--win-border); border-radius: 8px; box-shadow: var(--win-shadow); padding: 6px 0; width: 180px; z-index: 1500; }
 .context-item { width: 100%; background: none; border: none; text-align: left; padding: 7px 16px; font-size: 12px; font-weight: 500; color: var(--win-text); cursor: pointer; transition: background-color 0.1s ease; }
 .context-item:hover { background-color: var(--win-selected); color: var(--win-accent); }
-.start-menu { position: absolute; bottom: 56px; left: 50%; transform: translateX(-50%); width: 480px; height: 480px; background-color: var(--win-surface); backdrop-filter: blur(32px) saturate(180%); -webkit-backdrop-filter: blur(32px) saturate(180%); border: 1px solid var(--win-border); border-radius: 12px; box-shadow: var(--win-shadow); z-index: 1200; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
+.start-menu { position: absolute; bottom: 56px; left: 50%; transform: translateX(-50%); width: 480px; height: 480px; background-color: var(--win-surface); backdrop-filter: blur(32px); -webkit-backdrop-filter: blur(32px); border: 1px solid var(--win-border); border-radius: 12px; box-shadow: var(--win-shadow); z-index: 1200; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
 html:not(.dark) .start-menu {
   background-color: rgba(255, 255, 255, 0.90);
   border: 1px solid rgba(255, 255, 255, 0.9);
@@ -481,7 +481,7 @@ html:not(.dark) .start-menu {
 .start-app-btn:hover { background-color: var(--win-selected); }
 .start-app-label { font-size: 11px; font-weight: 500; color: var(--win-text); margin-top: 6px; text-align: center; }
 .start-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--win-border); padding-top: 14px; }
-.taskbar { position: absolute; bottom: 0; left: 0; width: 100vw; height: 48px; background-color: var(--win-taskbar); backdrop-filter: blur(28px) saturate(180%); -webkit-backdrop-filter: blur(28px) saturate(180%); border-top: 1px solid var(--win-border); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; box-sizing: border-box; z-index: 1000; }
+.taskbar { position: absolute; bottom: 0; left: 0; width: 100vw; height: 48px; background-color: var(--win-taskbar); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); border-top: 1px solid var(--win-border); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; box-sizing: border-box; z-index: 1000; }
 .taskbar-center { position: absolute; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
 .taskbar-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: none; border: none; border-radius: 6px; cursor: pointer; transition: background-color 0.15s; }
 .taskbar-icon:hover { background-color: var(--win-hover); }
