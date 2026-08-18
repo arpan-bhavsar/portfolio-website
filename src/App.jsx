@@ -398,17 +398,17 @@ const MernWallpaper = ({ darkMode }) => {
   const bg = darkMode ? '#000000' : '#f8fafc';
 
   // Individual Brand Colors for the M E R N letters
-  // Dark mode: White. Light mode: Ultra-Vibrant Colorful
-  const colorM = darkMode ? '#ffffffa4' : '#10b981';  // Emerald
-  const colorE = darkMode ? '#ffffffa4' : '#64748b';  // Slate
-  const colorR = darkMode ? '#ffffffa4' : '#0ea5e9';  // Sky Blue
-  const colorN = darkMode ? '#ffffffa4' : '#22c55e';  // Green
+  // Dark mode: Very faint white so icons stay readable. Light mode: Ultra-Vibrant Colorful
+  const colorM = darkMode ? 'rgba(255, 255, 255, 0.14)' : '#10b981';  // Emerald
+  const colorE = darkMode ? 'rgba(255, 255, 255, 0.7)' : '#64748b';  // Slate
+  const colorR = darkMode ? 'rgba(255, 255, 255, 0.14)' : '#0ea5e9';  // Sky Blue
+  const colorN = darkMode ? 'rgba(255, 255, 255, 0.7)' : '#22c55e';  // Green
 
   // Corresponding Stroke Colors for the 4 explicit logos
-  const strokeM = darkMode ? 'rgba(255, 255, 255, 0.3)' : '#10b981';
-  const strokeE = darkMode ? 'rgba(255, 255, 255, 0.3)' : '#64748b';
-  const strokeR = darkMode ? 'rgba(255, 255, 255, 0.3)' : '#0ea5e9';
-  const strokeN = darkMode ? 'rgba(255, 255, 255, 0.3)' : '#22c55e';
+  const strokeM = darkMode ? 'rgba(255, 255, 255, 0.14)' : '#10b981';
+  const strokeE = darkMode ? 'rgba(255, 255, 255, 0.7)' : '#64748b';
+  const strokeR = darkMode ? 'rgba(255, 255, 255, 0.14)' : '#0ea5e9';
+  const strokeN = darkMode ? 'rgba(255, 255, 255, 0.7)' : '#22c55e';
 
   // Drop shadow for that "wow" 3D pop in light mode
   const filterStyle = {
@@ -421,7 +421,8 @@ const MernWallpaper = ({ darkMode }) => {
   return (
     <div style={{ position: 'absolute', inset: 0, zIndex: 0, backgroundColor: bg, transition: 'background-color 0.8s ease', overflow: 'hidden' }}>
 
-      <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style={filterStyle}>
+      {/* Changed preserveAspectRatio to 'xMidYMid meet' so it scales responsively without cropping the logos! */}
+      <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style={filterStyle}>
 
         {/* Center Massive Typography - Colored Individually */}
         <text x="960" y="540" fontFamily="Arial Black, Impact, system-ui, sans-serif" fontSize="480" fontWeight="900" textAnchor="middle" dominantBaseline="central" letterSpacing="25">
@@ -792,7 +793,7 @@ export default function App() {
                             <Icon size={12} style={{ color, flexShrink: 0 }} />
                             <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={displayTitle}>{displayTitle}</span>
                           </div>
-                          <button 
+                          <button
                             onClick={(e) => { e.stopPropagation(); closeWindow(w.id); }}
                             style={{ background: 'transparent', border: 'none', color: 'inherit', cursor: 'pointer', padding: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '4px', opacity: 0.7 }}
                             onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.background = 'rgba(255, 0, 0, 0.5)'; }}

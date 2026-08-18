@@ -69,7 +69,7 @@ export default function LandingText() {
       <div style={{ position: 'absolute', top: '120vh', width: '100%', pointerEvents: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <TextAnimation
           divideBy="word"
-          delay={0.4}
+          delay={0.3}
           className="text-white drop-shadow-2xl text-center"
           style={{ fontSize: "clamp(2.5rem, 8vw, 6rem)", fontFamily: '"Inter", sans-serif', fontWeight: 800 }}
           wordColors={["#ffffff", "#ffffff", "#ffffff", "#00e5ff"]} // "Welcome to My Portfolio" has 4 words
